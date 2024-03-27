@@ -15,59 +15,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_cibla")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-physics_object_picking = true
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(3000, 2000)
-zoom = Vector2(0.1, 0.1)
-
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_kyjoi")
-
-[node name="Area2D" type="Area2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(158, 242)
-script = ExtResource("3_s465x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Area2D"]
-shape = SubResource("RectangleShape2D_xve0x")
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Area2D"]
-texture = ExtResource("2_kp4uf")
-
-[node name="MenuBar" type="MenuBar" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PopupMenu" type="PopupMenu" parent="MenuBar"]
-item_count = 3
-item_0/text = "Default Zoom"
-item_0/id = 0
-item_1/text = "Actual Size"
-item_1/id = 1
-item_2/text = "Recenter Camera"
-item_2/id = 2
-
-[node name="BoxContainer" type="BoxContainer" parent="."]
-layout_mode = 1
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -77,14 +32,46 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="ZoomLabel" type="Label" parent="BoxContainer"]
+[node name="ZoomLabel" type="Label" parent="CanvasLayer/BoxContainer"]
 layout_mode = 2
 text = "Zoom"
 
-[node name="PosLabel" type="Label" parent="BoxContainer"]
+[node name="PosLabel" type="Label" parent="CanvasLayer/BoxContainer"]
 layout_mode = 2
 text = "Zoom"
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="input_event" from="SubViewportContainer/SubViewport/Area2D" to="SubViewportContainer/SubViewport/Area2D" method="_on_input_event"]
-[connection signal="id_pressed" from="MenuBar/PopupMenu" to="." method="_on_popup_menu_id_pressed"]
+[node name="MenuBar" type="MenuBar" parent="CanvasLayer"]
+offset_right = 103.0
+offset_bottom = 40.0
+
+[node name="PopupMenu" type="PopupMenu" parent="CanvasLayer/MenuBar"]
+item_count = 3
+item_0/text = "Default Zoom"
+item_0/id = 0
+item_1/text = "Actual Size"
+item_1/id = 1
+item_2/text = "Recenter Camera"
+item_2/id = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(3000, 2000)
+zoom = Vector2(0.1, 0.1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 6000.0
+offset_bottom = 4000.0
+mouse_filter = 2
+texture = ExtResource("1_kyjoi")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(158, 242)
+script = ExtResource("3_s465x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xve0x")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_kp4uf")
+
+[connection signal="id_pressed" from="CanvasLayer/MenuBar/PopupMenu" to="." method="_on_popup_menu_id_pressed"]
+[connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]

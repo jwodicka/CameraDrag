@@ -11,6 +11,7 @@ func _ready():
 func _process(delta):
 	if is_dragging:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			return # Don't actually move the piece!
 			position = get_viewport().get_mouse_position() - drag_offset * get_viewport_transform().affine_inverse()
 	else:
 		end_drag()
@@ -25,10 +26,12 @@ func end_drag():
 		is_dragging = false
 		
 func _on_input_event(viewport, event, shape_idx):
+	print(viewport, event, shape_idx)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				begin_drag()
 			else:
 				end_drag()
+	
 

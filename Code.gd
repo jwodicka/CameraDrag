@@ -7,7 +7,7 @@ var speed = 1000
 var base_camera_position = Vector2(3000, 2000)
 
 @onready
-var camera = $SubViewportContainer/SubViewport/Camera2D
+var camera = $Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,9 +19,9 @@ func _process(delta):
 	# Using this to keep labels of state up-to-date.
 	# It's horribly inefficient, but this is a repro case for an error, not my game.
 	var zoom = camera.get_zoom()
-	$BoxContainer/ZoomLabel.set_text("Zoom: %.3v" % [zoom])
+	$CanvasLayer/BoxContainer/ZoomLabel.set_text("Zoom: %.3v" % [zoom])
 	var pos = camera.position
-	$BoxContainer/PosLabel.set_text("Camera Pos: %.1v" % [pos])
+	$CanvasLayer/BoxContainer/PosLabel.set_text("Camera Pos: %.1v" % [pos])
 	
 	if Input.is_action_pressed("pan_left"):
 		camera.position += Vector2.LEFT * speed * delta
@@ -41,7 +41,7 @@ func _on_popup_menu_id_pressed(id):
 		2:	# Recenter Camera
 			camera.position = base_camera_position
 
-func _on_gui_input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("zoom_in"):
 		var zoom = camera.get_zoom()
 		camera.set_zoom(zoom + zoom_increment)
