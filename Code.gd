@@ -26,7 +26,7 @@ func _process(delta):
 	$CanvasLayer/BoxContainer/PosLabel.set_text("Camera Pos: %.1v" % [pos])
 	var dpos = draggable.position
 	$CanvasLayer/BoxContainer/DraggablePosLabel.set_text("Draggable Pos: %.1v" % [dpos])
-	var mpos = get_viewport().get_mouse_position()
+	var mpos = get_global_mouse_position()
 	$CanvasLayer/BoxContainer/MousePosLabel.set_text("Mouse Pos: %.1v" % [mpos])
 	
 	if Input.is_action_pressed("pan_left"):

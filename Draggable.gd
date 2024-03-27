@@ -11,15 +11,13 @@ func _ready():
 func _process(delta):
 	if is_dragging:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			return # Don't actually move the piece!
-			position = get_viewport().get_mouse_position() - drag_offset * get_viewport_transform().affine_inverse()
+			position = get_global_mouse_position() - drag_offset
 	else:
 		end_drag()
 	
 func begin_drag():
 	is_dragging = true;
-	var viewport_position = position * get_viewport_transform()
-	drag_offset = get_viewport().get_mouse_position() - viewport_position		
+	drag_offset = get_global_mouse_position() - position
 	
 func end_drag():
 	if is_dragging:
