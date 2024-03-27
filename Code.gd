@@ -8,6 +8,8 @@ var base_camera_position = Vector2(3000, 2000)
 
 @onready
 var camera = $Camera2D
+@onready
+var draggable = $Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +24,10 @@ func _process(delta):
 	$CanvasLayer/BoxContainer/ZoomLabel.set_text("Zoom: %.3v" % [zoom])
 	var pos = camera.position
 	$CanvasLayer/BoxContainer/PosLabel.set_text("Camera Pos: %.1v" % [pos])
+	var dpos = draggable.position
+	$CanvasLayer/BoxContainer/DraggablePosLabel.set_text("Draggable Pos: %.1v" % [dpos])
+	var mpos = get_viewport().get_mouse_position()
+	$CanvasLayer/BoxContainer/MousePosLabel.set_text("Mouse Pos: %.1v" % [mpos])
 	
 	if Input.is_action_pressed("pan_left"):
 		camera.position += Vector2.LEFT * speed * delta
@@ -40,6 +46,8 @@ func _on_popup_menu_id_pressed(id):
 			camera.set_zoom(Vector2.ONE)
 		2:	# Recenter Camera
 			camera.position = base_camera_position
+		3:	# Recenter Draggable
+			draggable.position = base_camera_position
 
 func _unhandled_input(event):
 	if event.is_action_pressed("zoom_in"):

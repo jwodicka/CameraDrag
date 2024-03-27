@@ -23,14 +23,14 @@ script = ExtResource("1_cibla")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
-anchors_preset = 12
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-grow_horizontal = 2
+offset_top = -77.0
+offset_right = 45.0
 grow_vertical = 0
 mouse_filter = 2
+vertical = true
 
 [node name="ZoomLabel" type="Label" parent="CanvasLayer/BoxContainer"]
 layout_mode = 2
@@ -40,18 +40,31 @@ text = "Zoom"
 layout_mode = 2
 text = "Zoom"
 
+[node name="DraggablePosLabel" type="Label" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "Zoom"
+
+[node name="MousePosLabel" type="Label" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "Zoom"
+
 [node name="MenuBar" type="MenuBar" parent="CanvasLayer"]
 offset_right = 103.0
 offset_bottom = 40.0
 
 [node name="PopupMenu" type="PopupMenu" parent="CanvasLayer/MenuBar"]
-item_count = 3
+item_count = 5
 item_0/text = "Default Zoom"
 item_0/id = 0
 item_1/text = "Actual Size"
 item_1/id = 1
 item_2/text = "Recenter Camera"
 item_2/id = 2
+item_3/text = ""
+item_3/id = 100
+item_3/separator = true
+item_4/text = "Recenter Draggable"
+item_4/id = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(3000, 2000)
