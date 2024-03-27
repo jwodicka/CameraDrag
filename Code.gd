@@ -3,6 +3,7 @@ extends Control
 var zoom_increment = Vector2(0.001, 0.001)
 var base_zoom = Vector2(0.1, 0.1)
 var speed = 1000
+var rotate_speed = 0.2
 
 var base_camera_position = Vector2(3000, 2000)
 
@@ -37,6 +38,12 @@ func _process(delta):
 		camera.position += Vector2.UP * speed * delta
 	if Input.is_action_pressed("pan_down"):
 		camera.position += Vector2.DOWN * speed * delta
+	if Input.is_action_pressed("rotate_clockwise"):
+		print("clockwise")
+		camera.rotation -= rotate_speed * delta
+	if Input.is_action_pressed("rotate_counterclockwise"):
+		print("counterclockwise")
+		camera.rotation += rotate_speed * delta
 
 func _on_popup_menu_id_pressed(id):
 	match id:

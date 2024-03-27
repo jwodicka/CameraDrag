@@ -68,6 +68,7 @@ item_4/id = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(3000, 2000)
+ignore_rotation = false
 zoom = Vector2(0.1, 0.1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
