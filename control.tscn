@@ -41,6 +41,16 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_kyjoi")
 
+[node name="Area2D" type="Area2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(158, 242)
+script = ExtResource("3_s465x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Area2D"]
+shape = SubResource("RectangleShape2D_xve0x")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Area2D"]
+texture = ExtResource("2_kp4uf")
+
 [node name="MenuBar" type="MenuBar" parent="."]
 layout_mode = 0
 offset_right = 40.0
@@ -74,16 +84,6 @@ text = "Zoom"
 layout_mode = 2
 text = "Zoom"
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(158, 242)
-script = ExtResource("3_s465x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_xve0x")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("2_kp4uf")
-
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="input_event" from="SubViewportContainer/SubViewport/Area2D" to="SubViewportContainer/SubViewport/Area2D" method="_on_input_event"]
 [connection signal="id_pressed" from="MenuBar/PopupMenu" to="." method="_on_popup_menu_id_pressed"]
-[connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]
